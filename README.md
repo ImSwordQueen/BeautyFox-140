@@ -1,14 +1,8 @@
-# Beautyfox is being rewritten!
-Beautyfox 2 is in the works and will be a complete rewrite of Beautyfox that supports Firefox 128 ESR, as well as bringing more Internet Explorer eras than ever to the forefront, with new options, beta designs, and even Firefox Theme compability on the horizon.
+# Beautyfox 140
 
-You can track development of Beautyfox 2 from the `main` branch - once Beautyfox 2 is completed, you will be able to find Beautyfox 1.0 in the `archive-bruni/beautyfox-1` branch.
+Beautyfox for Nocturne 140. This version is not mainable yet as some parts of the JS isn't ported yet. The theme requires `nocturne.ui.oldurlbar` to be set to `true` to have a proper URL bar.
 
-Enjoy AngelBruni's original version of Beautyfox in the meantime!
-
-## Wait, this isn't angelbruni's GitHub!
-
-That's right - AngelBruni transferred Beautyfox to me! You can find out more information in the Discord Server linked below.
-
+All credits to @nt5point1 for this port, just rehosting it here and might fix some stuff when I feel like it.
 
 # What is BeautyFox?
 BeautyFox is a theme for Firefox 115 ESR that aims to replicate the Internet Explorer 9, 10, and 11 look and feel.
