@@ -147,7 +147,7 @@ html[lang=ja] {
 :root[customcolour] {
   --desiredColourForUI: #0284c5;
 }
-:root:is([privatebrowsingmode=temporary]) #urlbar-input-container::before {
+:root:is([privatebrowsingmode=temporary]) .urlbar-input-container::before {
   content: "";
   height: 100%;
   width: var(--urlbar-inprivatebadge-width);
@@ -156,7 +156,7 @@ html[lang=ja] {
   background-repeat: no-repeat !important;
 }
 @supports -moz-bool-pref("BeautyFox.appearance.IE9PreRelease") {
-  :root:is([privatebrowsingmode=temporary]) #urlbar-input-container::before {
+  :root:is([privatebrowsingmode=temporary]) .urlbar-input-container::before {
     background: url(images/InPrivateBadge9PreRelease.svg);
     margin-left: 2px;
   }
@@ -750,7 +750,7 @@ toolbarpaletteitem[id*=wrapper-customizableui-special-spring] > toolbarspring {
 
 #urlbar {
   font-size: 9pt !important;
-  top: 0 !important;
+  /* top: 0 !important; FUUUUCK YOOOOOOOOOU */
   max-height: var(--urlbar-height) !important;
 }
 @media (-moz-windows-classic) {
@@ -765,22 +765,22 @@ toolbarpaletteitem[id*=wrapper-customizableui-special-spring] > toolbarspring {
   left: 0 !important;
   width: 100% !important;
 }
-#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+#urlbar[breakout][breakout-extend] > .urlbar-input-container {
   height: var(--urlbar-height) !important;
 }
 
-#urlbar-input-container {
+.urlbar-input-container {
   padding: 0 0 0 0 !important;
   border-radius: 0 !important;
   border-right: 0 !important;
 }
-#urlbar-input-container.urlbar-remove-padding-right {
+.urlbar-input-container.urlbar-remove-padding-right {
   overflow: visible !important;
   margin-inline-end: -16px !important;
   width: auto !important;
 }
 @supports -moz-bool-pref("BeautyFox.appearance.IE9PreRelease") {
-  #urlbar-input-container.urlbar-remove-padding-right {
+  .urlbar-input-container.urlbar-remove-padding-right {
     margin-inline-end: calc(var(--stop-reload-button_width) * -1) !important;
   }
 }
@@ -1931,7 +1931,7 @@ toolbarbutton {
   border-left-width: 0;
   border-right-width: 1px !important;
 }
-#stop-reload-button + #urlbar-container #urlbar-input-container.urlbar-remove-padding-right {
+#stop-reload-button + #urlbar-container .urlbar-input-container.urlbar-remove-padding-right {
   overflow: visible !important;
   margin-inline-end: 0 !important;
   width: auto !important;
@@ -2024,7 +2024,7 @@ toolbarbutton {
 *|*:root[chromehidden~=toolbar] #urlbar-container #urlbar-background {
   border-right: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
-*|*:root[chromehidden~=toolbar] #urlbar-container #urlbar-input-container {
+*|*:root[chromehidden~=toolbar] #urlbar-container .urlbar-input-container {
   padding-right: 0 !important;
 }
 *|*:root[chromehidden~=toolbar] #identity-icon-box {
@@ -6012,3 +6012,17 @@ panel .panel-viewstack {
 .devtools-horizontal-splitter {
   background-color: rgb(163, 167, 172) !important;
 }/*# sourceMappingURL=userChrome.css.map */
+
+#urlbar[breakout-extend] {
+    width: var(--urlbar-real-width) !important;
+    left: unset !important;
+}
+
+#urlbar[breakout-extend] .urlbarView {
+    width: calc(var(--urlbar-real-width) - 2px) !important;
+    max-width: calc(var(--urlbar-real-width) - 2px) !important;
+    margin-inline: 0 !important;
+}
+:root {
+    --browser-area-z-index-toolbox: 2 !important;
+}
