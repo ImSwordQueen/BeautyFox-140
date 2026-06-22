@@ -1,6 +1,6 @@
 # Beautyfox 140
 
-Beautyfox for Nocturne 140. This version is not mainable yet as some parts of the JS isn't ported yet. The theme requires `nocturne.ui.oldurlbar` to be set to `true` to have a proper URL bar.
+Beautyfox for Nocturne 140. This version is not mainable yet as some parts of the JS hasn't been worked on to work on Firefox 140 yet. The theme requires `nocturne.ui.oldurlbar` to be set to `true` to have a proper URL bar.
 
 All credits to @nt5point1 for this port, just rehosting it here and might fix some stuff when I feel like it.
 
