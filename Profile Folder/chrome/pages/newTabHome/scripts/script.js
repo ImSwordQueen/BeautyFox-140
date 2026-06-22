@@ -217,4 +217,4 @@ function populateRecentSitesGrid() {
 var prefObserver = { observe: function (subject, topic, data) { if (topic == 'nsPref:changed') { retrieveFrequentSites(); } } };
 Services.prefs.addObserver('browser.newtabpage.activity-stream.topSitesRows', prefObserver, false)
 
-const { SessionStore } = Components.utils.import("resource:///modules/sessionstore/SessionStore.jsm", {});
+const { SessionStore } = ChromeUtils.importESModule("resource:///modules/sessionstore/SessionStore.sys.mjs");

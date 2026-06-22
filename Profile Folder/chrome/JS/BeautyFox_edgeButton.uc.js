@@ -18,14 +18,14 @@ function createMSEdgeNewTabButton() {
     var TabsMSEdgeNewTabButton = document.createXULElement('toolbarbutton');
     TabsMSEdgeNewTabButton.classList.add('toolbarbutton-1');
     TabsMSEdgeNewTabButton.id = 'TabsMSEdgeNewTabButton';
-    TabsMSEdgeNewTabButton.setAttribute('oncommand', 'runFile("microsoft-edge:", "")')
+    TabsMSEdgeNewTabButton.addEventListener('click', () => runFile("microsoft-edge:", ""));
     tabbrowserArrowscrollboxPeriphery.insertBefore(TabsMSEdgeNewTabButton, tabbrowserArrowscrollboxPeriphery.lastChild);
 
     var tabsToolbarCustomizationTarget = document.getElementById('TabsToolbar-customization-target');
     var MSEdgeNewTabButton = document.createXULElement('toolbarbutton');
     MSEdgeNewTabButton.classList.add('toolbarbutton-1');
     MSEdgeNewTabButton.id = 'MSEdgeNewTabButton';
-    MSEdgeNewTabButton.setAttribute('oncommand', 'runFile("microsoft-edge:", "")')
+    MSEdgeNewTabButton.addEventListener('click', () => runFile("microsoft-edge:", ""));
     tabsToolbarCustomizationTarget.insertBefore(MSEdgeNewTabButton, tabsToolbarCustomizationTarget.lastChild);
 
 	const tabsToolbar = document.getElementById('TabsToolbar');

@@ -1,4 +1,4 @@
-const { ctypes } = Components.utils.import("resource://gre/modules/ctypes.jsm", {});
+const { ctypes } = ChromeUtils.importESModule("resource://gre/modules/ctypes.sys.mjs");
 
 settingsManager.load();
 

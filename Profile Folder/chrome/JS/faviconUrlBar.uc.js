@@ -25,10 +25,10 @@
 
 
 		if(favicon_click_opens_page_info_window)
-		favimginurlbar.setAttribute("onclick","gIdentityHandler.handleMoreInfoClick(event);");
+		favimginurlbar.addEventListener('click', (event) => gIdentityHandler.handleMoreInfoClick(event));
 
 
-		document.getElementById('urlbar-input-container').prepend(favimginurlbar);
+		document.getElementsByClassName('urlbar-input-container')[0].prepend(favimginurlbar);
 
 		// update script every time a tab attribute gets modified
 		document.addEventListener("TabAttrModified", updateIcon, false);
@@ -55,6 +55,6 @@
 		}
 
 	} catch(e) {}
-
+	
 })();
   

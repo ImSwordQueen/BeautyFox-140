@@ -21,7 +21,7 @@ function styleDownloads() {
 		const closeButton = document.createXULElement('toolbarbutton');
 		closeButton.id = 'closeButton';
 		closeButton.setAttribute('label', 'Close');
-		closeButton.setAttribute('oncommand', 'window.close()');
+		closeButton.addEventListener('click', () => window.close());
 		placesToolbar.appendChild(closeButton);
 
 		const clearDownloadsButton = document.getElementById('clearDownloadsButton');

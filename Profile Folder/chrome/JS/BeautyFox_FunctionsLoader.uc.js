@@ -5,7 +5,7 @@
 // @loadorder   2
 // ==/UserScript==
 
-const { ctypes } = Components.utils.import("resource://gre/modules/ctypes.jsm", {});
+const { ctypes } = ChromeUtils.importESModule("resource://gre/modules/ctypes.sys.mjs");
 
 if (location == "chrome://browser/content/browser.xhtml" || location == "chrome://bfwindows/content/options/index.xhtml") {
 	function executeFunctions() {
@@ -33,10 +33,12 @@ if (location == "chrome://browser/content/browser.xhtml" || location == "chrome:
 		createCBPrintButton();
 		createCBReadMailButton()
 		downloadsButton();
-		createFakeTitlebarSpace();
+		// createFakeTitlebarSpace();
+		createTitlebar();
 		createStatusbar();
 		updateStatusbarAppearance();
 		loadLocale();
+		initURLBarWidth();
 	
 		setTimeout(() => { applyTranslations(); }, 1000);
 		

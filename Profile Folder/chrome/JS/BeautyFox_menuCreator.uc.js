@@ -6,6 +6,64 @@
 
 // ATTENTION: Most of this code is TERRIBLE, no worries, Geckium will bring a better one.
 
+function dispatchCommand(cmd) {
+	const dispatch = {
+		'BrowserDownloadsUI();':                                            () => BrowserDownloadsUI(),
+		'BrowserFullScreen();':                                             () => BrowserFullScreen(),
+		'BrowserOffline.toggleOfflineStatus();':                            () => BrowserOffline.toggleOfflineStatus(),
+		'BrowserOpenAddonsMgr();':                                          () => BrowserOpenAddonsMgr(),
+		'BrowserPageInfo();':                                               () => BrowserPageInfo(),
+		'BrowserViewSource(window.gBrowser.selectedBrowser)':              () => BrowserViewSource(window.gBrowser.selectedBrowser),
+		'FullZoom.enlarge()':                                               () => FullZoom.enlarge(),
+		'FullZoom.reduce()':                                                () => FullZoom.reduce(),
+		'FullZoom.setZoom(.5)':                                             () => FullZoom.setZoom(.5),
+		'FullZoom.setZoom(.75)':                                            () => FullZoom.setZoom(.75),
+		'FullZoom.setZoom(1)':                                              () => FullZoom.setZoom(1),
+		'FullZoom.setZoom(1.25)':                                           () => FullZoom.setZoom(1.25),
+		'FullZoom.setZoom(1.5)':                                            () => FullZoom.setZoom(1.5),
+		'FullZoom.setZoom(2)':                                              () => FullZoom.setZoom(2),
+		'FullZoom.setZoom(4)':                                              () => FullZoom.setZoom(4),
+		'MailIntegration.sendLinkForBrowser(gBrowser.selectedBrowser);':   () => MailIntegration.sendLinkForBrowser(gBrowser.selectedBrowser),
+		'OpenBrowserWindow();':                                             () => OpenBrowserWindow(),
+		'OpenBrowserWindow({private: true});':                              () => OpenBrowserWindow({private: true}),
+		'PrintUtils.togglePrintPreview(gBrowser.selectedBrowser.browsingContext);': () => PrintUtils.togglePrintPreview(gBrowser.selectedBrowser.browsingContext),
+		'Sanitizer.showUI(window);':                                        () => Sanitizer.showUI(window),
+		'SessionStore.restoreLastSession();':                               () => SessionStore.restoreLastSession(),
+		'findMoreAccelerators();':                                          () => findMoreAccelerators(),
+		'gBrowser.toggleCaretBrowsing()':                                   () => gBrowser.toggleCaretBrowsing(),
+		'gCustomizeMode.enter();':                                          () => gCustomizeMode.enter(),
+		'gLazyFindCommand(\'onFindCommand\')':                              () => gLazyFindCommand('onFindCommand'),
+		'gPageStyleMenu.disableStyle();':                                   () => gPageStyleMenu.disableStyle(),
+		'gPageStyleMenu.switchStyleSheet(null);':                           () => gPageStyleMenu.switchStyleSheet(null),
+		'gProtectionsHandler.openPreferences()':                            () => gProtectionsHandler.openPreferences(),
+		'goDoCommand(\'cmd_cut\')':                                         () => goDoCommand('cmd_cut'),
+		'goDoCommand(\'cmd_copy\')':                                        () => goDoCommand('cmd_copy'),
+		'goDoCommand(\'cmd_paste\')':                                       () => goDoCommand('cmd_paste'),
+		'mailWithWindowsLive()':                                            () => mailWithWindowsLive(),
+		'openAboutIE();':                                                   () => openAboutIE(),
+		'openBeautyFoxOptionsDialog();':                                    () => openBeautyFoxOptionsDialog(),
+		'openHelpLink(\'firefox-help\');':                                  () => openHelpLink('firefox-help'),
+		'openInternetOptions();':                                           () => openInternetOptions(),
+		'openWhatsNewIE();':                                                () => openWhatsNewIE(),
+		'openWindowsUpdate()':                                              () => openWindowsUpdate(),
+		'reportUnsafeWebsite();':                                           () => reportUnsafeWebsite(),
+		'runFile("msdt.exe", "-skip TRUE -path C:\\\\Windows\\\\diagnostics\\\\system\\\\networking -ep NetworkDiagnosticsConnectivity")': () => runFile("msdt.exe", "-skip TRUE -path C:\\Windows\\diagnostics\\system\\networking -ep NetworkDiagnosticsConnectivity"),
+		'saveBrowser(gBrowser.selectedBrowser);':                           () => saveBrowser(gBrowser.selectedBrowser),
+		'sendFeedbackLink();':                                              () => sendFeedbackLink(),
+		'translatePage()':                                                  () => translatePage(),
+		'toggleToolbar(\'toolbar-menubar\');':                              () => toggleToolbar('toolbar-menubar'),
+		'toggleToolbar(\'commandBar\');':                                   () => toggleToolbar('commandBar'),
+		'BookmarkingUI.toggleBookmarksToolbar(\'shortcut\');':              () => BookmarkingUI.toggleBookmarksToolbar('shortcut'),
+		'SidebarUI.toggle(\'viewBookmarksSidebar\');':                      () => SidebarUI.toggle('viewBookmarksSidebar'),
+		'SidebarUI.toggle(\'viewHistorySidebar\')':                         () => SidebarUI.toggle('viewHistorySidebar'),
+		'SidebarUI.toggle(\'viewTabsSidebar\');':                           () => SidebarUI.toggle('viewTabsSidebar'),
+		'_ucUtils.loadURI(window,{url: \'chrome://userchrome/content/temppages/changelogs/ob-1.0.2.html\', where: \'tab\'});': () => _ucUtils.loadURI(window, {url: 'chrome://userchrome/content/temppages/changelogs/ob-1.0.2.html', where: 'tab'}),
+	};
+	const fn = dispatch[cmd.trim()];
+	if (fn) { fn(); }
+	else { console.warn('BeautyFox menuCreator: unknown command:', cmd); }
+}
+
 function createMenu(menuData) {
 	try {
 		var externalBtn = document.createXULElement('toolbarbutton');
@@ -13,16 +71,17 @@ function createMenu(menuData) {
 		if (!menuData.locale == "") { externalBtn.setAttribute('locale', menuData.locale); }
 		externalBtn.style.listStyleImage = menuData.image;
 		setAttributes(externalBtn, {
-			'label': menuData.name,
-			'onclick':'event.preventDefault();event.stopPropagation();',
-			'type':'menu',
-			'removable':true
+			'label':     menuData.name,
+			'type':      'menu',
+			'removable': true
 		})
 		if (menuData.classes) {
 			if (Array.isArray(menuData.classes)) { externalBtn.classList.add(...menuData.classes); }
 			else { externalBtn.classList.add(menuData.classes); }
 		}
 		externalBtn.addEventListener('click', (event) => {
+			event.preventDefault();
+			event.stopPropagation();
 			if (event.target === externalBtn) {
 				if (event.shiftKey) {
 					menuData._externalAppPopup.querySelectorAll('[special="true"]').forEach((item) => {
@@ -104,12 +163,12 @@ function createMenuItem(parent, item) {
 	} else if (item.type === 'app') {
 		var appsItems = document.createXULElement('menuitem');
 		setAttributes(appsItems, {
-			'class':		'menuitem-iconic',
-			'id':			item.id,
-			'label':		item.name,
-			'image':		item.image,
-			'oncommand':	item.command
+			'class': 'menuitem-iconic',
+			'id':    item.id,
+			'label': item.name,
+			'image': item.image
 		})
+		appsItems.addEventListener('command', () => { dispatchCommand(item.command); });
 		if (item.special) {
 			appsItems.setAttribute('special', item.special);
 			appsItems.style.display = 'none';

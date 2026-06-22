@@ -46,7 +46,7 @@ window.addEventListener("TabAttrModified", secureStateTextFieldBackground)
 function removeReloadWhenTyping() {
 	var refreshBtn = document.getElementById("stop-reload-button");
 	const reloadButton = document.getElementById("reload-button");
-	const urlbarInputContainer = document.getElementById("urlbar-input-container");
+	const urlbarInputContainer = document.getElementsByClassName('urlbar-input-container')[0];
 	const urlbar = document.getElementById("urlbar");
 	const urlbarObserverConfig = { attributes: true, childList: false, subtree: false };
 	const urlbarObserverCallback = (mutationList) => {
@@ -130,4 +130,24 @@ function fixUrlbarHeight() {
 		urlbar.style.setProperty("--urlbar-height", urlbarHeight);
 		urlbar.style.setProperty("--urlbar-toolbar-height", urlbarHeight);
 	}, 500);	
+}
+async function initURLBarWidth() {
+    console.log("initURLBarWidth called");
+    const urlbar = document.getElementById("urlbar");
+    console.log("urlbar nodeName:", urlbar.nodeName);
+    const urlbarContainer = urlbar.parentElement;
+    
+    const fakeURLBar = document.createXULElement("hbox");
+    fakeURLBar.id = "fake-urlbar-width";
+    fakeURLBar.setAttribute("flex", "1");
+    urlbarContainer.insertBefore(fakeURLBar, urlbarContainer.lastChild);
+    console.log("fake element inserted:", document.getElementById("fake-urlbar-width"));
+    
+    const observer = new ResizeObserver(([entry]) => {
+        urlbar.style.setProperty(
+            "--urlbar-real-width",
+            entry.borderBoxSize[0].inlineSize + "px"
+        );
+    });
+    observer.observe(fakeURLBar);
 }

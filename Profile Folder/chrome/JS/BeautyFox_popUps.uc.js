@@ -67,8 +67,7 @@ function updateIdentityPopup() {
 		if (!document.getElementById("identity-popup-link")) {
 			const identityPopupLink = document.createXULElement('toolbarbutton');
 			identityPopupLink.id = "identity-popup-link";
-			identityPopupLink.setAttribute('onclick', "_ucUtils.loadURI(window, { url: 'https://support.microsoft.com/en-us/windows/certificate-errors-faq-402e08c1-bdd6-5d5c-64f2-ccb8f73cea5c', where: 'tab' });")
-			identityPopupSecurityViewExtendedInfo.appendChild(identityPopupLink);
+			identityPopupLink.addEventListener('click', () => _ucUtils.loadURI(window, { url: 'https://support.microsoft.com/en-us/windows/certificate-errors-faq-402e08c1-bdd6-5d5c-64f2-ccb8f73cea5c', where: 'tab' }));identityPopupSecurityViewExtendedInfo.appendChild(identityPopupLink);
 			insertAfter(identityPopupLink, identityPopupSecurityViewExtendedInfo);
 		}
 
